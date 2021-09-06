@@ -15,34 +15,29 @@ function Nodes({ $app, initialState, onClick, prevClick }) {
     const { nodes = [], isRoot } = this.state;
     const nodesTemplate = nodes
       .map((node) => {
-        const iconPath =
-          node.type === "FILE" ? "./assets/file.png" : "./assets/directory.png";
+        const iconPath = node.type === "FILE" ? "./assets/file.png" : "./assets/directory.png";
         return `<div class='Node' data-index=${node.id}>
                         <img src=${iconPath} alt=${node.type} />
                         <div>${node.name}</div>
                     </div>`;
       })
       .join("");
-    $nodesContainer.innerHTML = isRoot
-      ? nodesTemplate
-      : `${prevBtn}${nodesTemplate}`;
+    $nodesContainer.innerHTML = isRoot ? nodesTemplate : `${prevBtn}${nodesTemplate}`;
+    this.$nodesContainer.querySelectorAll('.Node').addEventListener('click', (e) => {
+      const index = clicckedNode.dataset.index;
+      if (index) {
+        const findNode = this.state.nodes.find((node) => node.id === index);
+        this.onClick(findNode);
+      } else {
+        this.prevClick();
+      }
+    })
   };
 
   this.setState = (nextState) => {
     this.state = nextState;
     this.render();
   };
-
-  $nodesContainer.addEventListener("click", (e) => {
-    const clicckedNode = e.target.closest(".Node");
-    const index = clicckedNode.dataset.index;
-    if (index) {
-      const findNode = this.state.nodes.find((node) => node.id === index);
-      this.onClick(findNode);
-    } else {
-      this.prevClick();
-    }
-  });
 }
 
 export default Nodes;

@@ -72,4 +72,18 @@
     top: 50%;
     transform: translate(-50%, -50%);
   }
+
+  
+.Modal .ImageViewer {
+    width: 500px;
+    height: 500px;
+  }
+  
+  .Modal .content {
+    position: absolute;
+  }
+  
+  img {
+    width: 100%;
+  }
   
