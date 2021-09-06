@@ -8,6 +8,7 @@ module.exports = {
         publicPath: '/dist/',
         filename: 'bundle.js'
     },
+    mode: 'none',
     module: {
         rules: [
             {
@@ -22,5 +23,5 @@ module.exports = {
                 }
             }
         ]
-    }
+    },
 };
