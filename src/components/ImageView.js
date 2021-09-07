@@ -1,25 +1,23 @@
 const IMAGE_PREFIX = 'https://fe-dev-matching-2021-03-serverlessdeploymentbuck-t3kpj3way537.s3.ap-northeast-2.amazonaws.com/public';
 
-function ImageView({ $app, initialState }) {
+function ImageView({ $app, initialState, onClickClose }) {
     this.state = initialState;
+    this.onClickClose = onClickClose;
 
     const $imageArticle = document.createElement('article');
-    const $imageModal = document.createElement('div');
     const $imageContainer = document.createElement('div');
-    $imageContainer.className = 'ImageViewer';
-    $imageModal.className = 'Modal';
-    $imageModal.appendChild($imageContainer);
-    $imageArticle.appendChild($imageModal);
+    $imageContainer.className = 'Modal ImageViewer';
+    $imageArticle.appendChild($imageContainer);
     $app.appendChild($imageArticle);
 
-    $imageModal.style.display = 'none';
+    $imageContainer.style.display = 'none';
 
     this.render = () => {
         const { imagePath } = this.state;
         $imageContainer.innerHTML = imagePath ? `<div class='content'>
         <img src=${IMAGE_PREFIX}${imagePath} />
     </div>` : '';
-        $imageModal.style.display = imagePath ? 'block' : 'none';
+        $imageContainer.style.display = imagePath ? 'block' : 'none';
     }
 
     this.setState = nextState => {
@@ -28,8 +26,9 @@ function ImageView({ $app, initialState }) {
     }
 
     $imageContainer.addEventListener('click', (e) => {
-        const target = e.target.closest('.Modal');
-        $imageModal.style.display = target.style.display === 'block' ? 'none' : '';
+        const target = e.target.closest('.content');
+        $imageContainer.style.display = (target !== null) ? 'block' : 'none' ;
+        target !== null ? this.onClickClose(false) : this.onClickClose(true);
     })
 }
 

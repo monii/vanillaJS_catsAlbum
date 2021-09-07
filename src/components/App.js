@@ -23,12 +23,12 @@ function App($app) {
           isLoading: true,
           imagePath: "",
         });
-        const prevNodes = await getDirectoryData(index);
+        const rootNodes = await getDirectoryData();
         this.setState({
           ...this.state,
           isLoading: false,
           isRoot: true,
-          nodes: prevNodes,
+          nodes: rootNodes,
           depth: [],
         });
       } else {
@@ -41,7 +41,7 @@ function App($app) {
           imagePath: "",
         });
         const nextDepth = this.state.depth.slice(0, index + 1);
-        const nextNodes = await getDirectoryData(nextDepth[length - 1].id);
+        const nextNodes = await getDirectoryData(nextDepth[nextDepth.length - 1].id);
         this.setState({
           ...this.state,
           isLoading: false,
@@ -107,6 +107,7 @@ function App($app) {
   const imageView = new ImageView({
     $app,
     initialState: { imagePath: this.state.imagePath },
+    onClickClose : isClose => {isClose ? this.setState({...this.state, imagePath: ''}) : '';}
   });
   const loading = new Loading({
     $app,
