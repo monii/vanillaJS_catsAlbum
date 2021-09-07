@@ -16,21 +16,21 @@ function App($app) {
   const breadcrumb = new Breadcrumb({
     $app,
     initialState: { depth: this.state.depth },
-    onClick: (index) => {
+    onClick: async (index) => {
       if (index === null) {
         this.setState({
           ...this.state,
           isLoading: true,
           imagePath: "",
         });
-         getDirectoryData(index).then((res) =>
+        const prevNodes = await getDirectoryData(index);
         this.setState({
-            ...this.state,
-            isLoading: false,
-            isRoot: true,
-            nodes: res,
-            depth: [],
-          }));
+          ...this.state,
+          isLoading: false,
+          isRoot: true,
+          nodes: prevNodes,
+          depth: [],
+        });
       } else {
         if (index === this.state.depth.length - 1) {
           return;
@@ -41,22 +41,20 @@ function App($app) {
           imagePath: "",
         });
         const nextDepth = this.state.depth.slice(0, index + 1);
-         getDirectoryData(nextDepth[length - 1].id).then(
-          (res) =>
-            this.setState({
-              ...this.state,
-              isLoading: false,
-              nodes: res,
-              depth: nextDepth,
-            })
-        );
+        const nextNodes = await getDirectoryData(nextDepth[length - 1].id);
+        this.setState({
+          ...this.state,
+          isLoading: false,
+          nodes: nextNodes,
+          depth: nextDepth,
+        });
       }
     },
   });
   const nodes = new Nodes({
     $app,
     initialState: { nodes: this.state.nodes },
-    onClick: (node) => {
+    onClick: async (node) => {
       this.setState({
         ...this.state,
         isLoading: true,
@@ -69,16 +67,14 @@ function App($app) {
           imagePath: node.filePath,
         });
       } else {
-        getDirectoryData(node.id).then((res) =>
-          this.setState({
-            ...this.state,
-            isRoot: false,
-            isLoading: false,
-            nodes: res,
-            depth: [...this.state.depth, node],
-          })
-        );
-      }
+        const nextNodes = await getDirectoryData(node.id);
+        this.setState({
+          ...this.state,
+          isRoot: false,
+          isLoading: false,
+          nodes: nextNodes,
+          depth: [...this.state.depth, node],
+        })}
     },
     prevClick: async () => {
       this.setState({
@@ -88,29 +84,23 @@ function App($app) {
       });
       const prevDirectory = [...this.state.depth];
       prevDirectory.pop();
-      const prevId =
-        prevDirectory.length === 0
-          ? null
-          : prevDirectory[prevDirectory.length - 1].id;
+      const prevId = prevDirectory.length === 0 ? null : prevDirectory[prevDirectory.length - 1].id;
       if (prevId) {
-        getDirectoryData(prevId).then((res) =>
+        const prevNodes = await getDirectoryData(prevId)
           this.setState({
             ...this.state,
             isLoading: false,
-            nodes: res,
+            nodes: prevNodes,
             depth: prevDirectory,
-          })
-        );
+          });
       } else {
-        getDirectoryData().then((res) =>
+        const rootNodes = await getDirectoryData();
           this.setState({
             ...this.state,
             isRoot: true,
             isLoading: false,
-            nodes: res,
-            depth: prevDirectory,
-          })
-        );
+            nodes: rootNodes,
+            depth: prevDirectory,})
       }
     },
   });
@@ -124,20 +114,20 @@ function App($app) {
   });
 
   this.setState = (nextState) => {
-    (this.state = nextState), breadcrumb.setState({ depth: this.state.depth });
+    this.state = nextState,
+    breadcrumb.setState({ depth: this.state.depth });
     nodes.setState({ isRoot: this.state.isRoot, nodes: this.state.nodes });
     imageView.setState({ imagePath: this.state.imagePath });
     loading.setState({ isLoading: this.state.isLoading });
   };
 
-  const init = () => {
-    getDirectoryData().then((res) =>
+  const init = async () => {
+    const rootNodes = await getDirectoryData();
       this.setState({
         ...this.state,
         isLoading: false,
-        nodes: res,
-      })
-    );
+        nodes: rootNodes,
+      });
   };
 
   init();
