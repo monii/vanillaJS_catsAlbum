@@ -23,15 +23,15 @@ function Nodes({ $app, initialState, onClick, prevClick }) {
       })
       .join("");
     $nodesContainer.innerHTML = isRoot ? nodesTemplate : `${prevBtn}${nodesTemplate}`;
-    this.$nodesContainer.querySelectorAll('.Node').addEventListener('click', (e) => {
-      const index = clicckedNode.dataset.index;
+    $nodesContainer.querySelectorAll('.Node').forEach($node =>  $node.addEventListener('click', (e) => {
+      const index = $node.dataset.index;
       if (index) {
         const findNode = this.state.nodes.find((node) => node.id === index);
         this.onClick(findNode);
       } else {
         this.prevClick();
       }
-    })
+    }));
   };
 
   this.setState = (nextState) => {
