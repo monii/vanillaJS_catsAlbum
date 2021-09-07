@@ -23,21 +23,23 @@ function Nodes({ $app, initialState, onClick, prevClick }) {
       })
       .join("");
     $nodesContainer.innerHTML = isRoot ? nodesTemplate : `${prevBtn}${nodesTemplate}`;
-    $nodesContainer.querySelectorAll('.Node').forEach($node =>  $node.addEventListener('click', (e) => {
-      const index = $node.dataset.index;
-      if (index) {
-        const findNode = this.state.nodes.find((node) => node.id === index);
-        this.onClick(findNode);
-      } else {
-        this.prevClick();
-      }
-    }));
   };
 
   this.setState = (nextState) => {
     this.state = nextState;
     this.render();
   };
+
+  $nodesContainer.addEventListener('click', (e) => {
+    const clicckedNode = e.target.closest('.Node');
+    const index = clicckedNode.dataset.index;
+    if(index) {
+        const findNode = this.state.nodes.find(node => node.id === index);
+        this.onClick(findNode);
+    } else {
+        this.prevClick();
+    }
+});
 }
 
 export default Nodes;
