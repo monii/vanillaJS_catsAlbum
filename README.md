@@ -1,5 +1,5 @@
 # vanillaJS_catsAlbum
-'2021 Dev-Matching: 웹 프론트엔드 개발자(상반기)' 기출 문제로 출제된 것을 풀어 본것을 복기한 레포입니다.  
+'2021 Dev-Matching: 웹 프론트엔드 개발자(상반기)' 기출 문제로 출제된 것을 풀어 본 코드를 바탕으로 정리한 것입니다.
 + 라이브러리와 프레임워크 없이 Vanilla JS로 고양이 사진첩을 만드는 애플리케이션.  
 + 구현한 과정과, 각 과정에서 참고한 지식들을 정리했습니다.  
 + [고양이 사진첩 애플리케이션 문제](https://programmers.co.kr/skill_check_assignments/100)
@@ -17,8 +17,10 @@ babel과 webpack등을 설치 후 ```npm start```를 이용하면 로컬에서 �
 + [관련커밋](https://github.com/monii/vanillaJS_catsAlbum/commit/08102c1c4d314f4875e8787e1ea201302296cab7)
 
 2.es6 모듈시스템
++ [관련커밋](https://github.com/monii/vanillaJS_catsAlbum/commit/bae7c7111a9188de9a2b6ab7970f95e7c4667857)
 
 3.async/await
++ [관련커밋](https://github.com/monii/vanillaJS_catsAlbum/commit/1e59950dacd7dd159454e8920b2d04ef0493e882)
 
 4.이벤트 위임(Event Delegation)
 
