@@ -24,9 +24,9 @@ babel과 webpack등을 설치 후 ```npm start```를 이용하면 로컬에서 �
 + [[개념]비동기처리](https://github.com/monii/vanillaJS_catsAlbum/blob/master/STUDY.md#3asyncawait)
 + [관련커밋](https://github.com/monii/vanillaJS_catsAlbum/commit/1e59950dacd7dd159454e8920b2d04ef0493e882)
 
-4.이벤트 위임(Event Delegation)
-+[[개념]이벤트 위임(Event Delegation)](https://github.com/monii/vanillaJS_catsAlbum/blob/master/STUDY.md#4%EC%9D%B4%EB%B2%A4%ED%8A%B8-%EC%9C%84%EC%9E%84event-delegation)
-+[관련커밋](https://github.com/monii/vanillaJS_catsAlbum/commit/fd49d3940047d4d74a6952d99f353444d0938d3f)
+4.이벤트 위임(Event Delegation)  
++ [[개념]이벤트 위임(Event Delegation)](https://github.com/monii/vanillaJS_catsAlbum/blob/master/STUDY.md#4%EC%9D%B4%EB%B2%A4%ED%8A%B8-%EC%9C%84%EC%9E%84event-delegation)
++ [관련커밋](https://github.com/monii/vanillaJS_catsAlbum/commit/fd49d3940047d4d74a6952d99f353444d0938d3f)
 
 ## :pencil2: 과제관후기
 프로그래머스에서 간간히 알고리즘 문제는 풀어 보았지만 이러한 유형의 문제는 처음 풀어 봤다.   
