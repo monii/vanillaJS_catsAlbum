@@ -1,6 +1,7 @@
 const webpack = require('webpack');
 const path = require('path');
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const CopyPlugin = require("copy-webpack-plugin");
 
 module.exports = {
     entry: './index.js',
@@ -22,12 +23,21 @@ module.exports = {
                         presets: ['@babel/preset-env']
                     }
                 }
-            }
+            },
+            {
+                test: /\.css$/,
+                use: ["style-loader", "css-loader"],
+            },
         ]
     },
     plugins: [
         new HtmlWebpackPlugin({
           template: "./index.html",
         }),
+        new CopyPlugin({
+            patterns: [
+              { from: "./assets", to: "assets" },
+            ],
+          }),
       ],
 };
