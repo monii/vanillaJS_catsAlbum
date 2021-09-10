@@ -86,4 +86,8 @@
   img {
     width: 100%;
   }
+
+  .navItem {
+    cursor: pointer;
+  }
   
