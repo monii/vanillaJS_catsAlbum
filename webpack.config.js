@@ -27,8 +27,13 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        use: [MiniCssExtractPlugin.loader, "css-loader"],
-    },
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader,
+          },
+          "css-loader",
+        ],
+      },
     ],
   },
   plugins: [
@@ -39,8 +44,8 @@ module.exports = {
       template: "./index.html",
     }),
     new CopyPlugin({
-      patterns: [{ from: "./assets", to: "assets" }],
+      patterns: [{ from: "./assets", to: "assets" },{from:"./src/styles/", to:"src/styles"}],
     }),
-    new MiniCssExtractPlugin()
+    new MiniCssExtractPlugin({ filename: "style.css" }),
   ],
 };
