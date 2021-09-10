@@ -5,6 +5,7 @@
 + [고양이 사진첩 애플리케이션 문제](https://programmers.co.kr/skill_check_assignments/100)
 
 ## :smile_cat: 과제 결과
+[![Netlify Status](https://api.netlify.com/api/v1/badges/69c21230-b449-48f5-991c-03a71d1b8e5c/deploy-status)](https://app.netlify.com/sites/cats-album/deploys)
 https://cats-album.netlify.app/  
 
 <img src = "https://github.com/monii/vanillaJS_catsAlbum/blob/master/study_assets/netlify-capture.png" width="80%" height="60%">
